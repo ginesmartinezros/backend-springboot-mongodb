@@ -42,11 +42,11 @@ public class BackendSpringbootMongodbApplication implements CommandLineRunner{
 		
 		System.out.println("\n----------------SHOW ALL USERS---------------------------\n");
 		
-		showAllUsers();
+		showAllUsers(); //TODO caution, this can return too much users
 		
 		System.out.println("\n--------------GET USER BY NAME-----------------------------------\n");
 		
-		getUserByName("Whole Wheat Biscuit");
+		getUserByName("Albert Einstein");
 		
 		System.out.println("\n-----------UPDATE EMAIL OF A USER------------------------\n");
 		
@@ -54,7 +54,7 @@ public class BackendSpringbootMongodbApplication implements CommandLineRunner{
 		
 		System.out.println("\n----------DELETE A USER----------------------------------\n");
 		
-		deleteUser("Kodo Millet");
+		deleteUser("f2j203j9do");
 		
 		System.out.println("\n-------------------THANK YOU---------------------------");
 	}

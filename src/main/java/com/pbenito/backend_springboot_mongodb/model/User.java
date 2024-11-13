@@ -3,7 +3,7 @@ package com.pbenito.backend_springboot_mongodb.model;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document("user") // Dentro del paréntesis debe ir el nombre de la coleccion
+@Document("users") // Dentro del paréntesis debe ir el nombre de la coleccion
 public class User {
 
     @Id
