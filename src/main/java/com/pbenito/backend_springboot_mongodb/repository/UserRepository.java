@@ -1,4 +1,4 @@
-package com.pbenito.backend_springboot_mongodb.respository;
+package com.pbenito.backend_springboot_mongodb.repository;
 
 import java.util.List;
 
@@ -10,11 +10,12 @@ import com.pbenito.backend_springboot_mongodb.model.User;
 public interface UserRepository extends MongoRepository<User, String> {
 	
 	@Query("{name:'?0'}")
-	User findItemByName(String name);
+	User findUserByName(String name);
 	
-	@Query(value="{category:'?0'}", fields="{'name' : 1, 'quantity' : 1}")
-	List<User> findAll(String category);
+	@Query(value="{email:'?0'}", fields="{'name' : 1, 'password' : 1}")
+	List<User> findAll(String email);
 	
+        @Override
 	public long count();
 
 }
