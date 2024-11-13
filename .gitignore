@@ -36,3 +36,5 @@ run_docker.bat
 push_docker.bat
 run_docker_no_delete_images.bat
 push_docker_no_delete_images.bat
+### Contains tokens ###
+src/main/resources/application.properties
