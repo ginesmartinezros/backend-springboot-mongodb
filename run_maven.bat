@@ -1,6 +1,13 @@
 @echo off
+REM Verificar si existe la carpeta "target" y eliminarla si es necesario
+if exist target (
+    echo Eliminando la carpeta "target"...
+    rmdir /s /q target
+    if %ERRORLEVEL% neq 0 (
+        echo "No se pudo eliminar la carpeta target. Verifica los permisos."
+        exit /b %ERRORLEVEL%
+    )
+)
 
-cd demo
-
-:: Ejecutar mvn clean install y luego mvn spring-boot:run si el primero tiene éxito
+REM Ejecutar mvn clean install y mvn spring-boot:run
 mvn clean install && mvn spring-boot:run
