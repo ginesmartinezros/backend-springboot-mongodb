@@ -1,25 +1,42 @@
 package com.pbenito.backend_springboot_mongodb.model;
 
+import java.util.Date;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document("transactions") // Dentro del paréntesis debe ir el nombre de la coleccion
+
+@Document("transactions") // Nombre de la colección en MongoDB
 public class Transaction {
 
     @Id
-    private String id;
-    private String name;
-    private String email;
-    private String password;
+    private String id; // ObjectId en MongoDB representado como String
+    private String shop; // Nombre de la tienda
+    private String shopId; // ID de la tienda
+    private String operationType; // Tipo de operación
+    private double amountEuro; // Monto en euros
+    private String operationDateString; // Fecha de operación como String
+    private Date operationDate; // Fecha de operación como Date
+    private String transactionId; // ID de la transacción
+    private String lastFourDigitsCreditCard; // Últimos 4 dígitos de la tarjeta
 
-    public Transaction(String id, String name, String email, String password) {
-        super();
+    // Constructor
+    public Transaction(String id, String shop, String shopId, 
+    String operationType, double amountEuro, String operationDateString, 
+    Date operationDate, String transactionId, 
+    String lastFourDigitsCreditCard) {
         this.id = id;
-        this.name = name;
-        this.email = email;
-        this.password = password;
+        this.shop = shop;
+        this.shopId = shopId;
+        this.operationType = operationType;
+        this.amountEuro = amountEuro;
+        this.operationDateString = operationDateString;
+        this.operationDate = operationDate;
+        this.transactionId = transactionId;
+        this.lastFourDigitsCreditCard = lastFourDigitsCreditCard;
     }
 
+    // Getters y setters
     public String getId() {
         return id;
     }
@@ -28,28 +45,67 @@ public class Transaction {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getShop() {
+        return shop;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setShop(String shop) {
+        this.shop = shop;
     }
 
-    public String getEmail() {
-        return email;
+    public String getShopId() {
+        return shopId;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setShopId(String shopId) {
+        this.shopId = shopId;
     }
 
-    public String getPassword() {
-        return password;
+    public String getOperationType() {
+        return operationType;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setOperationType(String operationType) {
+        this.operationType = operationType;
     }
 
+    public double getAmountEuro() {
+        return amountEuro;
+    }
+
+    public void setAmountEuro(double amountEuro) {
+        this.amountEuro = amountEuro;
+    }
+
+    public String getOperationDateString() {
+        return operationDateString;
+    }
+
+    public void setOperationDateString(String operationDateString) {
+        this.operationDateString = operationDateString;
+    }
+
+    public Date getOperationDate() {
+        return operationDate;
+    }
+
+    public void setOperationDate(Date operationDate) {
+        this.operationDate = operationDate;
+    }
+
+    public String getTransactionId() {
+        return transactionId;
+    }
+
+    public void setTransactionId(String transactionId) {
+        this.transactionId = transactionId;
+    }
+
+    public String getLastFourDigitsCreditCard() {
+        return lastFourDigitsCreditCard;
+    }
+
+    public void setLastFourDigitsCreditCard(String lastFourDigitsCreditCard) {
+        this.lastFourDigitsCreditCard = lastFourDigitsCreditCard;
+    }
 }
