@@ -2,6 +2,7 @@ package com.pbenito.backend_springboot_mongodb;
 
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,15 +47,15 @@ public class BackendSpringbootMongodbApplication implements CommandLineRunner{
 		
 		System.out.println("\n--------------GET USER BY NAME-----------------------------------\n");
 		
-		getTransactionByName("Albert Einstein");
+		getTransactionByTransactionId("170327");
 		
 		System.out.println("\n-----------UPDATE EMAIL OF A USER------------------------\n");
 		
-		updateTransactionEmail("sample@email.com");
+		updateTransactionAmount(0.88888);
 		
 		System.out.println("\n----------DELETE A USER----------------------------------\n");
 		
-		deleteTransaction("f2j203j9do");
+		deleteTransaction("sdfioashdoin");
 		
 		System.out.println("\n-------------------THANK YOU---------------------------");
 	}
@@ -64,8 +65,9 @@ public class BackendSpringbootMongodbApplication implements CommandLineRunner{
 	//CREATE
 	void createTransaction() {
 		System.out.println("Data creation started...");
-
-		transactionRepo.save(new Transaction("f2j203j9do", "Albert Einstein", "sample@email.com", "1234"));
+		Date currentDate = new Date();
+		transactionRepo.save(new Transaction("sdfioashdoin","test shop","sdfasdfa", 
+		 "Venta",  0.999,  "21/07/2001", currentDate,"99348", "0000"));
 		
 		System.out.println("Data creation complete...");
 	}
@@ -80,24 +82,24 @@ public class BackendSpringbootMongodbApplication implements CommandLineRunner{
 	 }
 	 
 	 // 2. Get transaction by name
-	 public void getTransactionByName(String name) {
-		 System.out.println("Getting transaction by name: " + name);
-		 Transaction transaction = transactionRepo.findTransactionByName(name);
+	 public void getTransactionByTransactionId(String transactionId) {
+		 System.out.println("Getting transaction by name: " + transactionId);
+		 Transaction transaction = transactionRepo.findTransactionByTransactionId(transactionId);
 		 System.out.println(getTransactionDetails(transaction));
 	 }
 
 	 // UPDATE APPROACH 1: Using MongoRepository
-	 public void updateTransactionEmail(String email) {
+	 public void updateTransactionAmount(double amount) {
 		 
 		 // Change to this new value
-		 String newEmail = "sample@gmail.com";
+		 double newAmount = 0.9999;
 		 
 		 // Find all the transactions with the category 
-		 List<Transaction> list = transactionRepo.findAll(email);
+		 List<Transaction> list = transactionRepo.findAll(newAmount);
 		 
 		 list.forEach(transaction -> {
 			 // Update the category in each document
-			 transaction.setEmail(newEmail);
+			 transaction.setAmountEuro(newAmount);
 		 });
 		 
 		 // Save all the transactions in database
@@ -109,9 +111,9 @@ public class BackendSpringbootMongodbApplication implements CommandLineRunner{
 	 
 	 
 	 // UPDATE APPROACH 2: Using MongoTemplate
-	 public void updateEmail(String name, String email) {
-		 System.out.println("Updating quantity for " + name);
-		 customRepo.updateTransactionEmail(name, email);
+	 public void updateAmount(String transactionId, double amount) {
+		 System.out.println("Updating amount");
+		 customRepo.updateTransactionAmount(transactionId, amount);
 	 }
 	 
 	 // DELETE
@@ -122,13 +124,16 @@ public class BackendSpringbootMongodbApplication implements CommandLineRunner{
 	 // Print details in readable form
 	 
 	 public String getTransactionDetails(Transaction transaction) {
-
-		 System.out.println(
-		 "Transaction Name: " + transaction.getName() + 
-		 ", \nTransaction Email: " + transaction.getEmail() + 
-		 ", \nTransaction Password: " + transaction.getPassword()
-		 );
-		 
-		 return "";
-	 }
+		System.out.println(
+			"Shop: " + transaction.getShop() + 
+			", \nShop ID: " + transaction.getShopId() + 
+			", \nOperation Type: " + transaction.getOperationType() + 
+			", \nAmount (EUR): " + transaction.getAmountEuro() + 
+			", \nOperation Date (String): " + transaction.getOperationDateString() + 
+			", \nOperation Date (ISO): " + transaction.getOperationDate() + 
+			", \nTransaction ID: " + transaction.getTransactionId() + 
+			", \nLast Four Digits of Credit Card: " + transaction.getLastFourDigitsCreditCard()
+		);
+		return "Transaction details logged successfully.";
+	}
 }

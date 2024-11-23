@@ -12,10 +12,9 @@ public interface TransactionRepository extends MongoRepository<Transaction, Stri
 	@Query("{transactionId:'?0'}")
 	Transaction findTransactionByTransactionId(String transactionId);
 	
-	@Query(value="{transactionId:'?0'}", fields="{'amountEuro' : 1, 'operationDate' : 1}")
-	List<Transaction> findAll(String transactionId);
+	@Query(value="{amountEuro:'?0'}", fields="{'transactionId' : 1, 'operationDate' : 1}")
+	List<Transaction> findAll(double amountEuro);
 	
         @Override
 	public long count();
-
 }
