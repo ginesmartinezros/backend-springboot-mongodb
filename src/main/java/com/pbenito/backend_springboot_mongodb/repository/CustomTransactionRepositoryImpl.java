@@ -17,10 +17,10 @@ public class CustomTransactionRepositoryImpl implements CustomTransactionReposit
 	MongoTemplate mongoTemplate;
 	
         @Override
-	public void updateTransactionEmail(String name, String email) {
-		Query query = new Query(Criteria.where("name").is(name));
+	public void updateTransactionAmount(String transactionId, double amount) {
+		Query query = new Query(Criteria.where("transactionId").is(transactionId));
 		Update update = new Update();
-		update.set("quantity", email);
+		update.set("amountEuro", amount);
 		
 		UpdateResult result = mongoTemplate.updateFirst(query, update, Transaction.class);
 		

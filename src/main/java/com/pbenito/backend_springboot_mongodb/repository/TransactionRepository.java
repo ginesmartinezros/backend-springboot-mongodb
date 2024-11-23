@@ -9,11 +9,11 @@ import com.pbenito.backend_springboot_mongodb.model.Transaction;
 
 public interface TransactionRepository extends MongoRepository<Transaction, String> {
 	
-	@Query("{name:'?0'}")
-	Transaction findTransactionByName(String name);
+	@Query("{transactionId:'?0'}")
+	Transaction findTransactionByTransactionId(String transactionId);
 	
-	@Query(value="{email:'?0'}", fields="{'name' : 1, 'password' : 1}")
-	List<Transaction> findAll(String email);
+	@Query(value="{transactionId:'?0'}", fields="{'amountEuro' : 1, 'operationDate' : 1}")
+	List<Transaction> findAll(String transactionId);
 	
         @Override
 	public long count();
