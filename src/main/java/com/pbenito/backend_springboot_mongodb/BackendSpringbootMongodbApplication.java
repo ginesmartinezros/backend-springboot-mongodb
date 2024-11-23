@@ -1,6 +1,5 @@
 package com.pbenito.backend_springboot_mongodb;
 
-
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -41,7 +40,7 @@ public class BackendSpringbootMongodbApplication implements CommandLineRunner{
 		
 		createTransaction();
 		*/
-		System.out.println("\n----------------SHOW ALL USERS---------------------------\n");
+		System.out.println("\n----------------SHOW ALL TRANSACTIONS---------------------------\n");
 		
 		showAllTransactions(); //TODO caution, this can return too much transactions
 		
@@ -112,7 +111,6 @@ public class BackendSpringbootMongodbApplication implements CommandLineRunner{
 		 if(transactionsUpdated != null)
 			 System.out.println("Successfully updated " + transactionsUpdated.size() + " transactions. \n");		 
 	 }
-	 
 	 
 	 // UPDATE APPROACH 2: Using MongoTemplate
 	 public void updateAmount(String transactionId, double amount) {
