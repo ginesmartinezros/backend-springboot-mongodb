@@ -36,15 +36,17 @@ public class BackendSpringbootMongodbApplication implements CommandLineRunner{
 	public void run(String... args){
 
 		//transactionRepo.deleteAll(); // Doesn't delete the collection
-		
+		/* 
 		System.out.println("-------------CREATE USER-------------------------------\n");
 		
 		createTransaction();
-		
+		*/
 		System.out.println("\n----------------SHOW ALL USERS---------------------------\n");
 		
 		showAllTransactions(); //TODO caution, this can return too much transactions
 		
+		/*
+
 		System.out.println("\n--------------GET USER BY NAME-----------------------------------\n");
 		
 		getTransactionByTransactionId("170327");
@@ -56,6 +58,8 @@ public class BackendSpringbootMongodbApplication implements CommandLineRunner{
 		System.out.println("\n----------DELETE A USER----------------------------------\n");
 		
 		deleteTransaction("sdfioashdoin");
+
+		*/
 		
 		System.out.println("\n-------------------THANK YOU---------------------------");
 	}
@@ -106,7 +110,7 @@ public class BackendSpringbootMongodbApplication implements CommandLineRunner{
 		 List<Transaction> transactionsUpdated = transactionRepo.saveAll(list);
 		 
 		 if(transactionsUpdated != null)
-			 System.out.println("Successfully updated " + transactionsUpdated.size() + " transactions.");		 
+			 System.out.println("Successfully updated " + transactionsUpdated.size() + " transactions. \n");		 
 	 }
 	 
 	 
@@ -134,6 +138,6 @@ public class BackendSpringbootMongodbApplication implements CommandLineRunner{
 			", \nTransaction ID: " + transaction.getTransactionId() + 
 			", \nLast Four Digits of Credit Card: " + transaction.getLastFourDigitsCreditCard()
 		);
-		return "Transaction details logged successfully.";
+		return "Transaction details logged successfully. \n";
 	}
 }
