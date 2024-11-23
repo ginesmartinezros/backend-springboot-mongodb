@@ -3,8 +3,8 @@ package com.pbenito.backend_springboot_mongodb.model;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document("users") // Dentro del paréntesis debe ir el nombre de la coleccion
-public class User {
+@Document("transactions") // Dentro del paréntesis debe ir el nombre de la coleccion
+public class Transaction {
 
     @Id
     private String id;
@@ -12,7 +12,7 @@ public class User {
     private String email;
     private String password;
 
-    public User(String id, String name, String email, String password) {
+    public Transaction(String id, String name, String email, String password) {
         super();
         this.id = id;
         this.name = name;

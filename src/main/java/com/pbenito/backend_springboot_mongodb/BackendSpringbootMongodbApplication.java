@@ -10,9 +10,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 
-import com.pbenito.backend_springboot_mongodb.model.User;
-import com.pbenito.backend_springboot_mongodb.repository.CustomUserRepository;
-import com.pbenito.backend_springboot_mongodb.repository.UserRepository;
+import com.pbenito.backend_springboot_mongodb.model.Transaction;
+import com.pbenito.backend_springboot_mongodb.repository.CustomTransactionRepository;
+import com.pbenito.backend_springboot_mongodb.repository.TransactionRepository;
 
 
 @SpringBootApplication
@@ -20,12 +20,12 @@ import com.pbenito.backend_springboot_mongodb.repository.UserRepository;
 public class BackendSpringbootMongodbApplication implements CommandLineRunner{
 	
 	@Autowired
-	UserRepository userRepo;
+	TransactionRepository transactionRepo;
 	
 	@Autowired
-	CustomUserRepository customRepo;
+	CustomTransactionRepository customRepo;
 	
-	List<User> userList = new ArrayList<>();
+	List<Transaction> transactionList = new ArrayList<>();
 
 	public static void main(String[] args) {
 		SpringApplication.run(BackendSpringbootMongodbApplication.class, args);
@@ -34,27 +34,27 @@ public class BackendSpringbootMongodbApplication implements CommandLineRunner{
         @Override
 	public void run(String... args){
 
-		//userRepo.deleteAll(); // Doesn't delete the collection
+		//transactionRepo.deleteAll(); // Doesn't delete the collection
 		
 		System.out.println("-------------CREATE USER-------------------------------\n");
 		
-		createUser();
+		createTransaction();
 		
 		System.out.println("\n----------------SHOW ALL USERS---------------------------\n");
 		
-		showAllUsers(); //TODO caution, this can return too much users
+		showAllTransactions(); //TODO caution, this can return too much transactions
 		
 		System.out.println("\n--------------GET USER BY NAME-----------------------------------\n");
 		
-		getUserByName("Albert Einstein");
+		getTransactionByName("Albert Einstein");
 		
 		System.out.println("\n-----------UPDATE EMAIL OF A USER------------------------\n");
 		
-		updateUserEmail("sample@email.com");
+		updateTransactionEmail("sample@email.com");
 		
 		System.out.println("\n----------DELETE A USER----------------------------------\n");
 		
-		deleteUser("f2j203j9do");
+		deleteTransaction("f2j203j9do");
 		
 		System.out.println("\n-------------------THANK YOU---------------------------");
 	}
@@ -62,71 +62,71 @@ public class BackendSpringbootMongodbApplication implements CommandLineRunner{
 	// CRUD operations
 
 	//CREATE
-	void createUser() {
+	void createTransaction() {
 		System.out.println("Data creation started...");
 
-		userRepo.save(new User("f2j203j9do", "Albert Einstein", "sample@email.com", "1234"));
+		transactionRepo.save(new Transaction("f2j203j9do", "Albert Einstein", "sample@email.com", "1234"));
 		
 		System.out.println("Data creation complete...");
 	}
 	
 	// READ
 	// 1. Show all the data
-	 public void showAllUsers() {
+	 public void showAllTransactions() {
 		 
-		 userList = userRepo.findAll();
+		 transactionList = transactionRepo.findAll();
 		 
-		 userList.forEach(user -> System.out.println(getUserDetails(user)));
+		 transactionList.forEach(transaction -> System.out.println(getTransactionDetails(transaction)));
 	 }
 	 
-	 // 2. Get user by name
-	 public void getUserByName(String name) {
-		 System.out.println("Getting user by name: " + name);
-		 User user = userRepo.findUserByName(name);
-		 System.out.println(getUserDetails(user));
+	 // 2. Get transaction by name
+	 public void getTransactionByName(String name) {
+		 System.out.println("Getting transaction by name: " + name);
+		 Transaction transaction = transactionRepo.findTransactionByName(name);
+		 System.out.println(getTransactionDetails(transaction));
 	 }
 
 	 // UPDATE APPROACH 1: Using MongoRepository
-	 public void updateUserEmail(String email) {
+	 public void updateTransactionEmail(String email) {
 		 
 		 // Change to this new value
 		 String newEmail = "sample@gmail.com";
 		 
-		 // Find all the users with the category 
-		 List<User> list = userRepo.findAll(email);
+		 // Find all the transactions with the category 
+		 List<Transaction> list = transactionRepo.findAll(email);
 		 
-		 list.forEach(user -> {
+		 list.forEach(transaction -> {
 			 // Update the category in each document
-			 user.setEmail(newEmail);
+			 transaction.setEmail(newEmail);
 		 });
 		 
-		 // Save all the users in database
-		 List<User> usersUpdated = userRepo.saveAll(list);
+		 // Save all the transactions in database
+		 List<Transaction> transactionsUpdated = transactionRepo.saveAll(list);
 		 
-		 if(usersUpdated != null)
-			 System.out.println("Successfully updated " + usersUpdated.size() + " users.");		 
+		 if(transactionsUpdated != null)
+			 System.out.println("Successfully updated " + transactionsUpdated.size() + " transactions.");		 
 	 }
 	 
 	 
 	 // UPDATE APPROACH 2: Using MongoTemplate
 	 public void updateEmail(String name, String email) {
 		 System.out.println("Updating quantity for " + name);
-		 customRepo.updateUserEmail(name, email);
+		 customRepo.updateTransactionEmail(name, email);
 	 }
 	 
 	 // DELETE
-	 public void deleteUser(String id) {
-		 userRepo.deleteById(id);
-		 System.out.println("user with id " + id + " deleted...");
+	 public void deleteTransaction(String id) {
+		 transactionRepo.deleteById(id);
+		 System.out.println("transaction with id " + id + " deleted...");
 	 }
 	 // Print details in readable form
 	 
-	 public String getUserDetails(User user) {
+	 public String getTransactionDetails(Transaction transaction) {
 
 		 System.out.println(
-		 "User Name: " + user.getName() + 
-		 ", \nUser Email: " + user.getEmail() + 
-		 ", \nUser Password: " + user.getPassword()
+		 "Transaction Name: " + transaction.getName() + 
+		 ", \nTransaction Email: " + transaction.getEmail() + 
+		 ", \nTransaction Password: " + transaction.getPassword()
 		 );
 		 
 		 return "";
