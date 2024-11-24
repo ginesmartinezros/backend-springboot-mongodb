@@ -36,5 +36,7 @@ run_docker.bat
 push_docker.bat
 run_docker_no_delete_images.bat
 push_docker_no_delete_images.bat
+get_api_transactions.bat
+post_api_transactions.bat
 ### Contains tokens ###
 src/main/resources/application.properties
