@@ -28,7 +28,5 @@ public class CustomTransactionRepositoryImpl implements CustomTransactionReposit
 			System.out.println("No documents updated");
 		else
 			System.out.println(result.getModifiedCount() + " document(s) updated..");
-
 	}
-
 }

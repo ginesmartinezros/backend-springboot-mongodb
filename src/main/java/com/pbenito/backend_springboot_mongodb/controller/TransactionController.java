@@ -1,9 +1,11 @@
 package com.pbenito.backend_springboot_mongodb.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -52,5 +54,28 @@ public class TransactionController {
     public List<Transaction> getAllTransactions(@RequestHeader(value = "Authorization", required = true) String token) {
         validateToken(token); // Validación del token
         return transactionService.getAllTransactions();
+    }
+    @GetMapping("/sales/day")
+    public ResponseEntity<List<Map<String, Object>>> getSalesByDay(@RequestHeader(value = "Authorization", required = true) String token) {
+        validateToken(token); // Validación del token
+        return ResponseEntity.ok(transactionService.getSalesByDay());
+    }
+
+    @GetMapping("/sales/week")
+    public ResponseEntity<List<Map<String, Object>>> getSalesByWeek(@RequestHeader(value = "Authorization", required = true) String token) {
+        validateToken(token); // Validación del token
+        return ResponseEntity.ok(transactionService.getSalesByWeek());
+    }
+
+    @GetMapping("/sales/month")
+    public ResponseEntity<List<Map<String, Object>>> getSalesByMonth(@RequestHeader(value = "Authorization", required = true) String token) {
+        validateToken(token); // Validación del token
+        return ResponseEntity.ok(transactionService.getSalesByMonth());
+    }
+
+    @GetMapping("/sales/year")
+    public ResponseEntity<List<Map<String, Object>>> getSalesByYear(@RequestHeader(value = "Authorization", required = true) String token) {
+        validateToken(token); // Validación del token
+        return ResponseEntity.ok(transactionService.getSalesByYear());
     }
 }
