@@ -14,8 +14,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.pbenito.backend_springboot_mongodb.dto.SalesByWeekDTO;
 import com.pbenito.backend_springboot_mongodb.model.Transaction;
 import com.pbenito.backend_springboot_mongodb.services.TransactionService;
+
 
 @RestController
 @RequestMapping("/api/transactions") // Ruta base para los endpoints
@@ -62,7 +64,7 @@ public class TransactionController {
     }
 
     @GetMapping("/sales/week")
-    public ResponseEntity<List<Map<String, Object>>> getSalesByWeek(@RequestHeader(value = "Authorization", required = true) String token) {
+    public ResponseEntity<List<SalesByWeekDTO>> getSalesByWeek(@RequestHeader(value = "Authorization", required = true) String token) {
         validateToken(token); // Validación del token
         return ResponseEntity.ok(transactionService.getSalesByWeek());
     }

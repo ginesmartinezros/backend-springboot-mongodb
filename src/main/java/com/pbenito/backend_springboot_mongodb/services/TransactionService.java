@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.pbenito.backend_springboot_mongodb.dto.SalesByWeekDTO;
 import com.pbenito.backend_springboot_mongodb.dto.TransactionDateDTO;
 import com.pbenito.backend_springboot_mongodb.model.Transaction;
 import com.pbenito.backend_springboot_mongodb.repository.TransactionRepository;
@@ -33,7 +34,7 @@ public class TransactionService {
         return transactionRepository.getSalesByDay();
     }
 
-    public List<Map<String, Object>> getSalesByWeek() {
+    public List<SalesByWeekDTO> getSalesByWeek() {
         try {
             return transactionRepository.getSalesByWeek();
         } catch (Exception e) {

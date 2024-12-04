@@ -7,6 +7,7 @@ import org.springframework.data.mongodb.repository.Aggregation;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;
 
+import com.pbenito.backend_springboot_mongodb.dto.SalesByWeekDTO;
 import com.pbenito.backend_springboot_mongodb.dto.TransactionDateDTO;
 import com.pbenito.backend_springboot_mongodb.model.Transaction;
 
@@ -30,7 +31,7 @@ public interface TransactionRepository extends MongoRepository<Transaction, Stri
                 "{ $group: { _id: { week: { $isoWeek: '$operationDate' }, year: { $year: '$operationDate' } }, totalAmount: { $sum: '$amountEuro' } } }",
                 "{ $sort: { '_id.year': 1, '_id.week': 1 } }"
         })
-        List<Map<String, Object>> getSalesByWeek();
+        List<SalesByWeekDTO> getSalesByWeek();
 
         
         @Aggregation(pipeline = {
@@ -51,4 +52,4 @@ public interface TransactionRepository extends MongoRepository<Transaction, Stri
         List<TransactionDateDTO> findTransactionDates();
 
 }
-//Encontrar transacciones no venta
+//TODO Encontrar transacciones no venta
