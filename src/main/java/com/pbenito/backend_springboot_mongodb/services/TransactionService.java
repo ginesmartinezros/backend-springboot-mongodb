@@ -1,11 +1,14 @@
 package com.pbenito.backend_springboot_mongodb.services;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.pbenito.backend_springboot_mongodb.dto.TransactionDateDTO;
 import com.pbenito.backend_springboot_mongodb.model.Transaction;
 import com.pbenito.backend_springboot_mongodb.repository.TransactionRepository;
 
@@ -46,5 +49,17 @@ public class TransactionService {
 
     public List<Map<String, Object>> getSalesByYear() {
         return transactionRepository.getSalesByYear();
+    }
+    public List<String> getTransactionDates() {
+        try {
+            List<TransactionDateDTO> dateDTOs = transactionRepository.findTransactionDates();
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd"); // O cualquier formato que desees
+            return dateDTOs.stream()
+                    .map(dto -> sdf.format(dto.getOperationDate())) // Convertir Date a String
+                    .collect(Collectors.toList());        
+                }
+        catch (Exception e) {
+            throw new RuntimeException("Error al obtener las fechas de las transacciones", e);
+        }
     }
 }

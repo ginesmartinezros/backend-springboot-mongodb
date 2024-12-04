@@ -78,4 +78,11 @@ public class TransactionController {
         validateToken(token); // Validación del token
         return ResponseEntity.ok(transactionService.getSalesByYear());
     }
+    @GetMapping("/transaction-dates")
+    public ResponseEntity<List<String>> getTransactionDates(
+        @RequestHeader(value = "Authorization", required = true) String token) {
+        validateToken(token); // Validación del token
+        return ResponseEntity.ok(transactionService.getTransactionDates());
+    }
+
 }

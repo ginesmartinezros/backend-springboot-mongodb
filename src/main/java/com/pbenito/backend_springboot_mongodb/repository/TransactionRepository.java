@@ -7,6 +7,7 @@ import org.springframework.data.mongodb.repository.Aggregation;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;
 
+import com.pbenito.backend_springboot_mongodb.dto.TransactionDateDTO;
 import com.pbenito.backend_springboot_mongodb.model.Transaction;
 
 public interface TransactionRepository extends MongoRepository<Transaction, String> {
@@ -45,5 +46,9 @@ public interface TransactionRepository extends MongoRepository<Transaction, Stri
                 "{ $sort: { '_id.year': 1 } }"
         })
         List<Map<String, Object>> getSalesByYear();
+
+        @Query(value = "{}", fields = "{'operationDate': 1, '_id': 0}")
+        List<TransactionDateDTO> findTransactionDates();
+
 }
 //Encontrar transacciones no venta
