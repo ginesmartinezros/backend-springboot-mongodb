@@ -31,7 +31,13 @@ public class TransactionService {
     }
 
     public List<Map<String, Object>> getSalesByWeek() {
-        return transactionRepository.getSalesByWeek();
+        try {
+            return transactionRepository.getSalesByWeek();
+        } catch (Exception e) {
+            // Manejo de excepciones
+            System.err.println("Error al obtener ventas por semana: " + e.getMessage());
+            throw new RuntimeException("No se pudieron obtener las ventas por semana", e);
+        }
     }
 
     public List<Map<String, Object>> getSalesByMonth() {
