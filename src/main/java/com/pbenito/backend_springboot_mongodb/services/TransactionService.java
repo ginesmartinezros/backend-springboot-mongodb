@@ -36,6 +36,8 @@ public class TransactionService {
 
     public List<SalesByWeekDTO> getSalesByWeek() {
         try {
+            List<SalesByWeekDTO> rawResults = transactionRepository.getSalesByWeek();
+            rawResults.forEach(System.out::println);
             return transactionRepository.getSalesByWeek();
         } catch (Exception e) {
             // Manejo de excepciones
