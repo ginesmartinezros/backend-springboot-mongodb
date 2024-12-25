@@ -68,12 +68,12 @@ public class TransactionController {
         validateToken(token); // Validación del token
         return ResponseEntity.ok(transactionService.getSalesByWeek());
     }
-
+    /* 
     @GetMapping("/sales/month")
     public ResponseEntity<List<Map<String, Object>>> getSalesByMonth(@RequestHeader(value = "Authorization", required = true) String token) {
         validateToken(token); // Validación del token
         return ResponseEntity.ok(transactionService.getSalesByMonth());
-    }
+    } */
 
     @GetMapping("/sales/year")
     public ResponseEntity<List<Map<String, Object>>> getSalesByYear(@RequestHeader(value = "Authorization", required = true) String token) {

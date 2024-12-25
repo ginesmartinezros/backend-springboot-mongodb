@@ -4,12 +4,14 @@ public class SalesByWeekDTO {
     
     private Integer week;
     private Integer year;
+    private String yearAndWeek;
     private Double totalAmount;
 
     // Constructor
-    public SalesByWeekDTO(Integer week, Integer year, Double totalAmount) {
+    public SalesByWeekDTO(Integer week, Integer year, String yearAndWeek,Double totalAmount) {
         this.week = week;
         this.year = year;
+        this.yearAndWeek = yearAndWeek;
         this.totalAmount = totalAmount;
     }
 
@@ -43,6 +45,7 @@ public class SalesByWeekDTO {
         return "SalesByWeekDTO{" +
                 "week=" + week +
                 ", year=" + year +
+                ", yearAndWeek=" + yearAndWeek +
                 ", totalAmount=" + totalAmount +
                 '}';
     }

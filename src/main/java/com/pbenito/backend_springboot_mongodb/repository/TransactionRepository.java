@@ -25,22 +25,23 @@ public interface TransactionRepository extends MongoRepository<Transaction, Stri
                 "{ $sort: { '_id.year': 1, '_id.day': 1 } }"
         })
         List<Map<String, Object>> getSalesByDay();
-
+/* 
         @Aggregation(pipeline = {
                 "{ $match: { operationType: 'VENTA', operationDate: { $exists: true, $ne: null } } }",
                 "{ $group: { _id: { week: { $toInt: { $isoWeek: '$operationDate' } } , year: { $toInt: { $year: '$operationDate' } } }, totalAmount: { $sum: '$amountEuro' } } }",
                 "{ $sort: { '_id.year': 1, '_id.week': 1 } }"
         })
-        List<SalesByWeekDTO> getSalesByWeek();
+        List<SalesByWeekDTO> getSalesByMonth(); //TODO no es eso */
 
         
         @Aggregation(pipeline = {
                 "{ $match: { operationType: 'VENTA', operationDate: { $exists: true, $ne: null } } }",
-                "{ $group: { _id: { month: { $month: '$operationDate' }, year: { $year: '$operationDate' } }, totalAmount: { $sum: '$amountEuro' } } }",
-                "{ $sort: { '_id.year': 1, '_id.month': 1 } }"
-        })
-        List<Map<String, Object>> getSalesByMonth();
-
+                "{ $group: { _id: { week: { $week: '$operationDate' }, year: { $year: '$operationDate' } }, totalAmount: { $sum: '$amountEuro' } } }",
+                "{ $project: { _id: 0, week: '$_id.week', year: '$_id.year', newId: { $concat: [ { $toString: '$_id.week' }, '-', { $toString: '$_id.year' } ] }, totalAmount: 1 } }",
+                "{ $sort: { year: 1, week: 1 } }"
+            })
+        List<SalesByWeekDTO> getSalesByWeek();
+            
         @Aggregation(pipeline = {
                 "{ $match: { operationType: 'VENTA', operationDate: { $exists: true, $ne: null } } }",
                 "{ $group: { _id: { year: { $year: '$operationDate' } }, totalAmount: { $sum: '$amountEuro' } } }",

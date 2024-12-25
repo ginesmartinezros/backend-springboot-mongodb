@@ -45,10 +45,10 @@ public class TransactionService {
             throw new RuntimeException("No se pudieron obtener las ventas por semana", e);
         }
     }
-
+/* 
     public List<Map<String, Object>> getSalesByMonth() {
         return transactionRepository.getSalesByMonth();
-    }
+    } */
 
     public List<Map<String, Object>> getSalesByYear() {
         return transactionRepository.getSalesByYear();
