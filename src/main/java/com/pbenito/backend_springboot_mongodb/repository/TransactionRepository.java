@@ -6,6 +6,8 @@ import org.springframework.data.mongodb.repository.Aggregation;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;
 
+import com.pbenito.backend_springboot_mongodb.dto.SalesByDayDTO;
+import com.pbenito.backend_springboot_mongodb.dto.SalesByMonthDTO;
 import com.pbenito.backend_springboot_mongodb.dto.SalesByWeekDTO;
 import com.pbenito.backend_springboot_mongodb.dto.SalesByYearDTO;
 import com.pbenito.backend_springboot_mongodb.dto.TransactionDateDTO;
@@ -25,7 +27,7 @@ public interface TransactionRepository extends MongoRepository<Transaction, Stri
                 "{ $project: { _id: 0, day: '$_id.day', year: '$_id.year' totalAmount: 1 } }",
                 "{ $sort: { '_id.year': 1, '_id.day': 1 } }"
         })
-        List<SalesByWeekDTO> getSalesByDay();
+        List<SalesByDayDTO> getSalesByDay();
 
         @Aggregation(pipeline = {
                 "{ $match: { operationType: 'VENTA', operationDate: { $exists: true, $ne: null } } }",
@@ -33,7 +35,7 @@ public interface TransactionRepository extends MongoRepository<Transaction, Stri
                 "{ $project: { _id: 0, month: '$_id.month', year: '$_id.year' totalAmount: 1 } }",
                 "{ $sort: { year: 1, month: 1 } }"
             })
-        List<SalesByWeekDTO> getSalesByMonth();
+        List<SalesByMonthDTO> getSalesByMonth();
         
         @Aggregation(pipeline = {
                 "{ $match: { operationType: 'VENTA', operationDate: { $exists: true, $ne: null } } }",

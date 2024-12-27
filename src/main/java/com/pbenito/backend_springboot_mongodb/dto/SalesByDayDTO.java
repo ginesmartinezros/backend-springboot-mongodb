@@ -1,25 +1,25 @@
 package com.pbenito.backend_springboot_mongodb.dto;
 
-public class SalesByWeekDTO { 
+public class SalesByDayDTO { 
     
-    private Integer week;
+    private Integer day;
     private Integer year;
     private Double totalAmount;
 
     // Constructor
-    public SalesByWeekDTO(Integer week, Integer year, Double totalAmount) {
-        this.week = week;
+    public SalesByDayDTO(Integer day, Integer year, Double totalAmount) {
+        this.day = day;
         this.year = year;
         this.totalAmount = totalAmount;
     }
 
     // Getters and setters
-    public Integer getWeek() {
-        return week;
+    public Integer getDay() {
+        return day;
     }
 
-    public void setWeek(Integer week) {
-        this.week = week;
+    public void setDay(Integer day) {
+        this.day = day;
     }
 
     public Integer getYear() {
@@ -40,8 +40,8 @@ public class SalesByWeekDTO {
 
     @Override
     public String toString() {
-        return "SalesByWeekDTO{" +
-                "week=" + week +
+        return "SalesByDayDTO{" +
+                "day=" + day +
                 ", year=" + year +
                 ", totalAmount=" + totalAmount +
                 '}';

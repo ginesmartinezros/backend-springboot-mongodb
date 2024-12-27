@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.pbenito.backend_springboot_mongodb.dto.SalesByWeekDTO;
 import com.pbenito.backend_springboot_mongodb.dto.SalesByYearDTO;
+import com.pbenito.backend_springboot_mongodb.dto.SalesByDayDTO;
+import com.pbenito.backend_springboot_mongodb.dto.SalesByMonthDTO;
 import com.pbenito.backend_springboot_mongodb.model.Transaction;
 import com.pbenito.backend_springboot_mongodb.services.TransactionService;
 
@@ -58,7 +60,7 @@ public class TransactionController {
         return transactionService.getAllTransactions();
     }
     @GetMapping("/sales/day")
-    public ResponseEntity<List<SalesByWeekDTO>> getSalesByDay(@RequestHeader(value = "Authorization", required = true) String token) {
+    public ResponseEntity<List<SalesByDayDTO>> getSalesByDay(@RequestHeader(value = "Authorization", required = true) String token) {
         validateToken(token); // Validación del token
         return ResponseEntity.ok(transactionService.getSalesByDay());
     }
@@ -70,7 +72,7 @@ public class TransactionController {
     }
 
     @GetMapping("/sales/month")
-    public ResponseEntity<List<SalesByWeekDTO>> getSalesByMonth(@RequestHeader(value = "Authorization", required = true) String token) {
+    public ResponseEntity<List<SalesByMonthDTO>> getSalesByMonth(@RequestHeader(value = "Authorization", required = true) String token) {
         validateToken(token); // Validación del token
         return ResponseEntity.ok(transactionService.getSalesByMonth());
     }

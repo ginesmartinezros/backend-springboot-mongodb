@@ -7,6 +7,8 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.pbenito.backend_springboot_mongodb.dto.SalesByDayDTO;
+import com.pbenito.backend_springboot_mongodb.dto.SalesByMonthDTO;
 import com.pbenito.backend_springboot_mongodb.dto.SalesByWeekDTO;
 import com.pbenito.backend_springboot_mongodb.dto.SalesByYearDTO;
 import com.pbenito.backend_springboot_mongodb.dto.TransactionDateDTO;
@@ -30,7 +32,7 @@ public class TransactionService {
     public List<Transaction> getAllTransactions() {
         return transactionRepository.findAll();
     }
-    public List<SalesByWeekDTO> getSalesByDay() {
+    public List<SalesByDayDTO> getSalesByDay() {
         return transactionRepository.getSalesByDay();
     }
 
@@ -46,7 +48,7 @@ public class TransactionService {
         }
     }
 
-    public List<SalesByWeekDTO> getSalesByMonth() {
+    public List<SalesByMonthDTO> getSalesByMonth() {
         return transactionRepository.getSalesByMonth();
     }
 
