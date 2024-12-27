@@ -1,13 +1,13 @@
 package com.pbenito.backend_springboot_mongodb.repository;
 
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.data.mongodb.repository.Aggregation;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;
 
 import com.pbenito.backend_springboot_mongodb.dto.SalesByWeekDTO;
+import com.pbenito.backend_springboot_mongodb.dto.SalesByYearDTO;
 import com.pbenito.backend_springboot_mongodb.dto.TransactionDateDTO;
 import com.pbenito.backend_springboot_mongodb.model.Transaction;
 
@@ -22,17 +22,18 @@ public interface TransactionRepository extends MongoRepository<Transaction, Stri
         @Aggregation(pipeline = {
                 "{ $match: { operationType: 'VENTA', operationDate: { $exists: true, $ne: null } } }",
                 "{ $group: { _id: { day: { $dayOfYear: '$operationDate' }, year: { $year: '$operationDate' } }, totalAmount: { $sum: '$amountEuro' } } }",
+                "{ $project: { _id: 0, day: '$_id.day', year: '$_id.year' totalAmount: 1 } }",
                 "{ $sort: { '_id.year': 1, '_id.day': 1 } }"
         })
-        List<Map<String, Object>> getSalesByDay();
-/* 
+        List<SalesByWeekDTO> getSalesByDay();
+
         @Aggregation(pipeline = {
                 "{ $match: { operationType: 'VENTA', operationDate: { $exists: true, $ne: null } } }",
-                "{ $group: { _id: { week: { $toInt: { $isoWeek: '$operationDate' } } , year: { $toInt: { $year: '$operationDate' } } }, totalAmount: { $sum: '$amountEuro' } } }",
-                "{ $sort: { '_id.year': 1, '_id.week': 1 } }"
-        })
-        List<SalesByWeekDTO> getSalesByMonth(); //TODO no es eso */
-
+                "{ $group: { _id: { month: { $month: '$operationDate' }, year: { $year: '$operationDate' } }, totalAmount: { $sum: '$amountEuro' } } }",
+                "{ $project: { _id: 0, month: '$_id.month', year: '$_id.year' totalAmount: 1 } }",
+                "{ $sort: { year: 1, month: 1 } }"
+            })
+        List<SalesByWeekDTO> getSalesByMonth();
         
         @Aggregation(pipeline = {
                 "{ $match: { operationType: 'VENTA', operationDate: { $exists: true, $ne: null } } }",
@@ -45,9 +46,11 @@ public interface TransactionRepository extends MongoRepository<Transaction, Stri
         @Aggregation(pipeline = {
                 "{ $match: { operationType: 'VENTA', operationDate: { $exists: true, $ne: null } } }",
                 "{ $group: { _id: { year: { $year: '$operationDate' } }, totalAmount: { $sum: '$amountEuro' } } }",
+                "{ $project: { _id: 0, year: '$_id.year' totalAmount: 1 } }",
                 "{ $sort: { '_id.year': 1 } }"
         })
-        List<Map<String, Object>> getSalesByYear();
+
+        List<SalesByYearDTO> getSalesByYear();
 
         @Query(value = "{}", fields = "{'operationDate': 1, '_id': 0}")
         List<TransactionDateDTO> findTransactionDates();

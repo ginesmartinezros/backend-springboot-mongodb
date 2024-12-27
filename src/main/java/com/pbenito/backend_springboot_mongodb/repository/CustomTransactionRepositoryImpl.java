@@ -24,9 +24,6 @@ public class CustomTransactionRepositoryImpl implements CustomTransactionReposit
 		
 		UpdateResult result = mongoTemplate.updateFirst(query, update, Transaction.class);
 		
-		if(result == null)
-			System.out.println("No documents updated");
-		else
-			System.out.println(result.getModifiedCount() + " document(s) updated..");
+		System.out.println(result.getModifiedCount() + " document(s) updated..");
 	}
 }

@@ -2,13 +2,13 @@ package com.pbenito.backend_springboot_mongodb.services;
 
 import java.text.SimpleDateFormat;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.pbenito.backend_springboot_mongodb.dto.SalesByWeekDTO;
+import com.pbenito.backend_springboot_mongodb.dto.SalesByYearDTO;
 import com.pbenito.backend_springboot_mongodb.dto.TransactionDateDTO;
 import com.pbenito.backend_springboot_mongodb.model.Transaction;
 import com.pbenito.backend_springboot_mongodb.repository.TransactionRepository;
@@ -30,7 +30,7 @@ public class TransactionService {
     public List<Transaction> getAllTransactions() {
         return transactionRepository.findAll();
     }
-    public List<Map<String, Object>> getSalesByDay() {
+    public List<SalesByWeekDTO> getSalesByDay() {
         return transactionRepository.getSalesByDay();
     }
 
@@ -45,12 +45,12 @@ public class TransactionService {
             throw new RuntimeException("No se pudieron obtener las ventas por semana", e);
         }
     }
-/* 
-    public List<Map<String, Object>> getSalesByMonth() {
-        return transactionRepository.getSalesByMonth();
-    } */
 
-    public List<Map<String, Object>> getSalesByYear() {
+    public List<SalesByWeekDTO> getSalesByMonth() {
+        return transactionRepository.getSalesByMonth();
+    }
+
+    public List<SalesByYearDTO> getSalesByYear() {
         return transactionRepository.getSalesByYear();
     }
     public List<String> getTransactionDates() {

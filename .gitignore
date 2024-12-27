@@ -38,5 +38,11 @@ run_docker_no_delete_images.bat
 push_docker_no_delete_images.bat
 get_api_transactions.bat
 post_api_transactions.bat
+get_api_sales_day.bat
+get_api_sales_week.bat
+get_api_sales_month.bat
+get_api_sales_year.bat
+api_test.bat
+
 ### Contains tokens ###
 src/main/resources/application.properties

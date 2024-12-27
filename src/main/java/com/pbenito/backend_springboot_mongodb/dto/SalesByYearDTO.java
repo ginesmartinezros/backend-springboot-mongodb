@@ -1,26 +1,17 @@
 package com.pbenito.backend_springboot_mongodb.dto;
 
-public class SalesByWeekDTO { //TODO cambiar nombre sales by aggreagtion
+public class SalesByYearDTO {
     
-    private Integer week;
     private Integer year;
     private Double totalAmount;
 
     // Constructor
-    public SalesByWeekDTO(Integer week, Integer year, Double totalAmount) {
-        this.week = week;
+    public SalesByYearDTO(Integer year, Double totalAmount) {
         this.year = year;
         this.totalAmount = totalAmount;
     }
 
     // Getters and setters
-    public Integer getWeek() {
-        return week;
-    }
-
-    public void setWeek(Integer week) {
-        this.week = week;
-    }
 
     public Integer getYear() {
         return year;
@@ -40,9 +31,8 @@ public class SalesByWeekDTO { //TODO cambiar nombre sales by aggreagtion
 
     @Override
     public String toString() {
-        return "SalesByWeekDTO{" +
-                "week=" + week +
-                ", year=" + year +
+        return "SalesByYearDTO{" +
+                "year=" + year +
                 ", totalAmount=" + totalAmount +
                 '}';
     }

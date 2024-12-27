@@ -1,7 +1,6 @@
 package com.pbenito.backend_springboot_mongodb.controller;
 
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.pbenito.backend_springboot_mongodb.dto.SalesByWeekDTO;
+import com.pbenito.backend_springboot_mongodb.dto.SalesByYearDTO;
 import com.pbenito.backend_springboot_mongodb.model.Transaction;
 import com.pbenito.backend_springboot_mongodb.services.TransactionService;
 
@@ -58,7 +58,7 @@ public class TransactionController {
         return transactionService.getAllTransactions();
     }
     @GetMapping("/sales/day")
-    public ResponseEntity<List<Map<String, Object>>> getSalesByDay(@RequestHeader(value = "Authorization", required = true) String token) {
+    public ResponseEntity<List<SalesByWeekDTO>> getSalesByDay(@RequestHeader(value = "Authorization", required = true) String token) {
         validateToken(token); // Validación del token
         return ResponseEntity.ok(transactionService.getSalesByDay());
     }
@@ -68,15 +68,15 @@ public class TransactionController {
         validateToken(token); // Validación del token
         return ResponseEntity.ok(transactionService.getSalesByWeek());
     }
-    /* 
+
     @GetMapping("/sales/month")
-    public ResponseEntity<List<Map<String, Object>>> getSalesByMonth(@RequestHeader(value = "Authorization", required = true) String token) {
+    public ResponseEntity<List<SalesByWeekDTO>> getSalesByMonth(@RequestHeader(value = "Authorization", required = true) String token) {
         validateToken(token); // Validación del token
         return ResponseEntity.ok(transactionService.getSalesByMonth());
-    } */
+    }
 
     @GetMapping("/sales/year")
-    public ResponseEntity<List<Map<String, Object>>> getSalesByYear(@RequestHeader(value = "Authorization", required = true) String token) {
+    public ResponseEntity<List<SalesByYearDTO>> getSalesByYear(@RequestHeader(value = "Authorization", required = true) String token) {
         validateToken(token); // Validación del token
         return ResponseEntity.ok(transactionService.getSalesByYear());
     }
