@@ -57,5 +57,6 @@ public interface TransactionRepository extends MongoRepository<Transaction, Stri
         @Query(value = "{}", fields = "{'operationDate': 1, '_id': 0}")
         List<TransactionDateDTO> findTransactionDates();
 
+        @Query(value = "{ 'operationType': { $ne: 'VENTA' } }")
+        List<Transaction> findAllNonSales();
 }
-//TODO Encontrar transacciones no venta

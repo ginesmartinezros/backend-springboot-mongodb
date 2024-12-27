@@ -39,7 +39,7 @@ public class TransactionService {
     public List<SalesByWeekDTO> getSalesByWeek() {
         try {
             List<SalesByWeekDTO> rawResults = transactionRepository.getSalesByWeek();
-            rawResults.forEach(System.out::println);
+            //rawResults.forEach(System.out::println);
             return transactionRepository.getSalesByWeek();
         } catch (Exception e) {
             // Manejo de excepciones
@@ -66,5 +66,8 @@ public class TransactionService {
         catch (Exception e) {
             throw new RuntimeException("Error al obtener las fechas de las transacciones", e);
         }
+    }
+    public List<Transaction> findAllNonSales() {
+        return transactionRepository.findAllNonSales();
     }
 }
