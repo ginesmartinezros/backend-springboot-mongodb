@@ -37,7 +37,7 @@ public interface TransactionRepository extends MongoRepository<Transaction, Stri
         @Aggregation(pipeline = {
                 "{ $match: { operationType: 'VENTA', operationDate: { $exists: true, $ne: null } } }",
                 "{ $group: { _id: { week: { $week: '$operationDate' }, year: { $year: '$operationDate' } }, totalAmount: { $sum: '$amountEuro' } } }",
-                "{ $project: { _id: 0, week: '$_id.week', year: '$_id.year', newId: { $concat: [ { $toString: '$_id.week' }, '-', { $toString: '$_id.year' } ] }, totalAmount: 1 } }",
+                "{ $project: { _id: 0, week: '$_id.week', year: '$_id.year' totalAmount: 1 } }",
                 "{ $sort: { year: 1, week: 1 } }"
             })
         List<SalesByWeekDTO> getSalesByWeek();
